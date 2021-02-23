@@ -20,7 +20,7 @@ RUN wget https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_22.
 
 RUN dpkg -i esl-erlang_22.1.6-1~raspbian~buster_armhf.deb
 
-RUN apt-get install -f
+RUN apt-get install -f -y
 
 RUN git clone https://github.com/helium/gateway_mfr.git
 
