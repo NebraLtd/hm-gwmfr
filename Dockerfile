@@ -20,7 +20,10 @@ RUN wget https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_22.
 
 RUN dpkg -i esl-erlang_22.3.4.9-1~ubuntu~focal_arm64.deb ; exit 0
 
-RUN apt-get install -f -y
+RUN \
+DEBIAN_FRONTEND="noninteractive" \
+TZ="Europe/London" \
+apt-get install -f -y --no-install-recommends
 
 RUN git clone https://github.com/helium/gateway_mfr.git
 
