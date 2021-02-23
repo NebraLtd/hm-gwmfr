@@ -18,7 +18,7 @@ RUN apt-get update && apt-get -y install \
 
 RUN wget https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_22.3.4.9-1~ubuntu~focal_arm64.deb
 
-RUN dpkg -i esl-erlang_22.3.4.9-1~ubuntu~focal_arm64.deb
+RUN dpkg -i esl-erlang_22.3.4.9-1~ubuntu~focal_arm64.deb ; exit 0
 
 RUN apt-get install -f -y
 
