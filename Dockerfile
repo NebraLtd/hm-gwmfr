@@ -16,9 +16,9 @@ RUN apt-get update && apt-get -y install \
   wget \
   --no-install-recommends
 
-RUN wget https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_22.1.6-1~raspbian~buster_armhf.deb
+RUN wget https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_22.3.4.9-1~ubuntu~focal_arm64.deb
 
-RUN dpkg -i esl-erlang_22.1.6-1~raspbian~buster_armhf.deb
+RUN dpkg -i esl-erlang_22.3.4.9-1~ubuntu~focal_arm64.deb
 
 RUN apt-get install -f -y
 
