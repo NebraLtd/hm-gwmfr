@@ -29,6 +29,8 @@ RUN git clone https://github.com/helium/gateway_mfr.git
 
 RUN cd gateway_mfr
 
+RUN ls -a
+
 RUN make release
 
 FROM arm64v8/ubuntu:20.04
