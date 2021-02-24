@@ -14,15 +14,14 @@ RUN apt-get update && apt-get -y install \
   pkg-config \
   build-essential \
   wget \
-  erlang-nox \
   libsodium-dev \
   libssl-dev  \
   libclang-dev \
   --no-install-recommends
 
-#RUN wget https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_22.3.4.9-1~ubuntu~focal_arm64.deb
+RUN wget https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_22.3.4.9-1~ubuntu~focal_arm64.deb
 
-#RUN dpkg -i esl-erlang_22.3.4.9-1~ubuntu~focal_arm64.deb ; exit 0
+RUN dpkg -i esl-erlang_22.3.4.9-1~ubuntu~focal_arm64.deb ; exit 0
 
 RUN \
 DEBIAN_FRONTEND="noninteractive" \
