@@ -17,16 +17,23 @@ RUN apt-get update && apt-get -y install \
   libsodium-dev \
   libssl-dev  \
   libclang-dev \
+  erlang-base \
+  erlang-crypto \
+  erlang-asn1 \
+  erlang-public-key \
+  erlang-ssl \
+  erlang-inets \
+  erlang-dev \
   --no-install-recommends
 
-RUN wget https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_22.3.4.9-1~ubuntu~focal_arm64.deb
+#RUN wget https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_22.3.4.9-1~ubuntu~focal_arm64.deb
 
-RUN dpkg -i esl-erlang_22.3.4.9-1~ubuntu~focal_arm64.deb ; exit 0
+#RUN dpkg -i esl-erlang_22.3.4.9-1~ubuntu~focal_arm64.deb ; exit 0
 
-RUN \
-DEBIAN_FRONTEND="noninteractive" \
-TZ="Europe/London" \
-apt-get install -f -y --no-install-recommends
+#RUN \
+#DEBIAN_FRONTEND="noninteractive" \
+#TZ="Europe/London" \
+#apt-get install -f -y --no-install-recommends
 
 RUN git clone https://github.com/helium/gateway_mfr.git
 
