@@ -9,9 +9,11 @@ ENV CC=gcc CXX=g++ CFLAGS="-U__sun__" \
     ERLANG_ROCKSDB_OPTS="-DWITH_BUNDLE_SNAPPY=ON -DWITH_BUNDLE_LZ4=ON" \
     ERL_COMPILER_OPTIONS="[deterministic]"
 
-RUN git clone https://github.com/helium/gateway_mfr.git
 
 WORKDIR /opt/gateway_mfr
+RUN git clone https://github.com/helium/gateway_mfr.git
+
+
 WORKDIR /opt/gateway_mfr/gateway_mfr
 
 RUN make release
@@ -22,7 +24,7 @@ RUN apk add --no-cache --update ncurses dbus gmp libsodium gcc
 
 WORKDIR /opt/gateway_mfr
 
-COPY --from=buildstep /opt/gateway_mfr .
+COPY --from=buildstep /opt/gateway_mfr/gateway_mfr/_build/prod/rel/gateway_mfr .
 
 
-#ENTRYPOINT ["sh", ""]
+ENTRYPOINT ["/opt/gateway_mfr/bin/gateway_mfr foreground", ""]
