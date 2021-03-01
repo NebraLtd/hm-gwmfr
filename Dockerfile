@@ -27,4 +27,4 @@ WORKDIR /opt/gateway_mfr
 COPY --from=buildstep /opt/gateway_mfr/gateway_mfr/_build/prod/rel/gateway_mfr .
 
 
-ENTRYPOINT ["/opt/gateway_mfr/bin/gateway_mfr foreground", ""]
+ENTRYPOINT ["/opt/gateway_mfr/bin/gateway_mfr", "foreground"]
