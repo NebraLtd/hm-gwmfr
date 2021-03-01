@@ -20,11 +20,11 @@ RUN make release
 
 FROM arm64v8/erlang:22.3.2-alpine
 
-RUN apk add --no-cache --update ncurses dbus gmp libsodium gcc
+RUN apk add --no-cache --update libsodium python3
 
 WORKDIR /opt/gateway_mfr
 
 COPY --from=buildstep /opt/gateway_mfr/gateway_mfr/_build/prod/rel/gateway_mfr .
 
 
-ENTRYPOINT ["/opt/gateway_mfr/bin/gateway_mfr", "foreground"]
+#ENTRYPOINT ["/opt/gateway_mfr/bin/gateway_mfr", "foreground"]
