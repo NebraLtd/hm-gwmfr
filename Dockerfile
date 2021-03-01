@@ -27,8 +27,8 @@ WORKDIR /opt/gateway_mfr
 COPY --from=buildstep /opt/gateway_mfr/gateway_mfr/_build/prod/rel/gateway_mfr .
 
 COPY nebraScript.sh .
-
+COPY eccProg.py .
 RUN chmod +x nebraScript.sh
 
 #ENTRYPOINT ["/opt/gateway_mfr/bin/gateway_mfr", "foreground"]
-ENTRYPOINT ["/opt/gateway_mfr/nebraScript"]
+ENTRYPOINT ["sh" , "/opt/gateway_mfr/nebraScript.sh"]
