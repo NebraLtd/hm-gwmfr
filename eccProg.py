@@ -29,7 +29,7 @@ if("ecc_response_exec_error" in preTestResult):
     else:
         print("\033[92mProgramming Success!\033[0m")
 
-elif (len(preTestResult) == 52):
+elif (len(preTestResult) == 51 or len(preTestResult) == 52):
     print("\033[93mKey Already Programmed\033[0m")
 
 else:
