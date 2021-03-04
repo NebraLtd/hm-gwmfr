@@ -18,6 +18,7 @@ WORKDIR /opt/gateway_mfr/gateway_mfr
 
 RUN make release
 
+
 FROM arm64v8/erlang:22.3.2-alpine
 
 RUN apk add --no-cache --update libsodium python3
