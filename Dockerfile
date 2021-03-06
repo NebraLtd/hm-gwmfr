@@ -1,5 +1,6 @@
 FROM arm64v8/erlang:22.3.2-alpine as buildstep
 
+# hadolint ignore=DL3013
 RUN apk add --no-cache --update \
     git tar build-base linux-headers autoconf automake libtool pkgconfig \
     dbus-dev bzip2 bison flex gmp-dev cmake lz4 libsodium-dev openssl-dev \
@@ -21,6 +22,7 @@ RUN make release
 
 FROM arm64v8/erlang:22.3.2-alpine
 
+# hadolint ignore=DL3013
 RUN apk add --no-cache --update libsodium python3
 
 WORKDIR /opt/gateway_mfr
