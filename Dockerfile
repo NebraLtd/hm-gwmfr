@@ -23,7 +23,7 @@ RUN make release
 FROM arm64v8/erlang:22.3.2-alpine
 
 # hadolint ignore=DL3018
-RUN apk add --no-cache --update libsodium
+RUN apk add --no-cache --update libsodium python3
 
 WORKDIR /opt/gateway_mfr
 
