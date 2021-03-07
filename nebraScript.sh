@@ -11,6 +11,3 @@ python3 /opt/gateway_mfr/eccProg.py
 echo "Python program finished, shutting down"
 
 /opt/gateway_mfr/bin/gateway_mfr stop
-
-echo "Sleeping"
-sleep infinity
