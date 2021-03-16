@@ -1,4 +1,4 @@
-FROM arm32v5/erlang:22.3.2-alpine as buildstep
+FROM arm32v6/erlang:22.3.2-alpine as buildstep
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache --update \
@@ -20,7 +20,7 @@ WORKDIR /opt/gateway_mfr/gateway_mfr
 RUN make release
 
 
-FROM arm32v5/erlang:22.3.2-alpine
+FROM arm32v6/erlang:22.3.2-alpine
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache --update libsodium python3
