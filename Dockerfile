@@ -4,7 +4,7 @@ FROM arm32v6/alpine:3.11 as buildstep
 RUN apk add --no-cache --update \
     git tar build-base linux-headers autoconf automake libtool pkgconfig \
     dbus-dev bzip2 bison flex gmp-dev cmake lz4 libsodium-dev openssl-dev \
-    sed wget rust cargo erlang erlang-dev
+    sed wget rust cargo erlang erlang-dev erlang-crypto
 
 ENV CC=gcc CXX=g++ CFLAGS="-U__sun__" \
     ERLANG_ROCKSDB_OPTS="-DWITH_BUNDLE_SNAPPY=ON -DWITH_BUNDLE_LZ4=ON" \
