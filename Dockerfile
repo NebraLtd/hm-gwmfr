@@ -1,10 +1,10 @@
-FROM arm32v6/erlang:22.3.2-alpine as buildstep
+FROM arm32v6/alpine:3.12.4 as buildstep
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache --update \
     git tar build-base linux-headers autoconf automake libtool pkgconfig \
     dbus-dev bzip2 bison flex gmp-dev cmake lz4 libsodium-dev openssl-dev \
-    sed wget rust cargo
+    sed wget rust cargo erlang
 
 ENV CC=gcc CXX=g++ CFLAGS="-U__sun__" \
     ERLANG_ROCKSDB_OPTS="-DWITH_BUNDLE_SNAPPY=ON -DWITH_BUNDLE_LZ4=ON" \
@@ -20,10 +20,10 @@ WORKDIR /opt/gateway_mfr/gateway_mfr
 RUN make release
 
 
-FROM arm32v6/erlang:22.3.2-alpine
+FROM arm32v6/alpine:3.12.4
 
 # hadolint ignore=DL3018
-RUN apk add --no-cache --update libsodium python3
+RUN apk add --no-cache --update erlang libsodium python3
 
 WORKDIR /opt/gateway_mfr
 
