@@ -1,14 +1,21 @@
-FROM arm64v8/erlang:22.3.2-alpine as buildstep
+FROM balenalib/raspberry-pi-debian:buster-build as buildstep
 
 # hadolint ignore=DL3018
-RUN apk add --no-cache --update \
-    git tar build-base linux-headers autoconf automake libtool pkgconfig \
-    dbus-dev bzip2 bison flex gmp-dev cmake lz4 libsodium-dev openssl-dev \
-    sed wget rust cargo
 
-ENV CC=gcc CXX=g++ CFLAGS="-U__sun__" \
-    ERLANG_ROCKSDB_OPTS="-DWITH_BUNDLE_SNAPPY=ON -DWITH_BUNDLE_LZ4=ON" \
-    ERL_COMPILER_OPTIONS="[deterministic]"
+
+RUN \
+apt-get update && \
+DEBIAN_FRONTEND="noninteractive" \
+TZ="Europe/London" \
+apt-get -y install \
+erlang-nox=1:21.2.6+dfsg-1 \
+erlang-dev=1:21.2.6+dfsg-1 \
+git=1:2.20.1-2+deb10u3 \
+--no-install-recommends && \
+apt-get autoremove -y &&\
+apt-get clean && \
+rm -rf /var/lib/apt/lists/*
+
 
 
 WORKDIR /opt/gateway_mfr
@@ -17,13 +24,23 @@ RUN git clone https://github.com/helium/gateway_mfr.git
 
 WORKDIR /opt/gateway_mfr/gateway_mfr
 
-RUN make release
+RUN DEBUG=1 make release
 
 
-FROM arm64v8/erlang:22.3.2-alpine
+FROM balenalib/raspberry-pi-debian:buster-run
 
 # hadolint ignore=DL3018
-RUN apk add --no-cache --update libsodium python3
+RUN \
+apt-get update && \
+DEBIAN_FRONTEND="noninteractive" \
+TZ="Europe/London" \
+apt-get -y install \
+erlang-nox=1:21.2.6+dfsg-1 \
+python3-minimal=3.7.3-1 \
+--no-install-recommends && \
+apt-get autoremove -y &&\
+apt-get clean && \
+rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt/gateway_mfr
 
