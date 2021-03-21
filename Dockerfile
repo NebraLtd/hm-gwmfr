@@ -1,4 +1,4 @@
-FROM arm32v6/alpine:3.11 as buildstep
+FROM balenalib/raspberry-pi-alpine:3.11-build as buildstep
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache --update \
@@ -21,7 +21,7 @@ WORKDIR /opt/gateway_mfr/gateway_mfr
 RUN make release
 
 
-FROM arm32v6/alpine:3.11
+FROM balenalib/raspberry-pi-alpine:3.11-run
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache --update erlang libsodium python3
