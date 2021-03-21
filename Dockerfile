@@ -8,9 +8,9 @@ apt-get update && \
 DEBIAN_FRONTEND="noninteractive" \
 TZ="Europe/London" \
 apt-get -y install \
-erlang-nox \
-erlang-dev \
-git \
+erlang-nox=1:21.2.6+dfsg-1 \
+erlang-dev=1:21.2.6+dfsg-1 \
+git= \
 --no-install-recommends && \
 apt-get autoremove -y &&\
 apt-get clean && \
@@ -35,8 +35,8 @@ apt-get update && \
 DEBIAN_FRONTEND="noninteractive" \
 TZ="Europe/London" \
 apt-get -y install \
-erlang-nox \
-python3-minimal \
+erlang-nox=1:21.2.6+dfsg-1 \
+python3-minimal=3.7.3-1 \
 --no-install-recommends && \
 apt-get autoremove -y &&\
 apt-get clean && \
