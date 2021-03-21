@@ -1,11 +1,21 @@
-FROM balenalib/raspberry-pi-alpine:3.11-build as buildstep
+FROM balenalib/raspberry-pi-debian:buster-build as buildstep
 
 # hadolint ignore=DL3018
-RUN apk add --no-cache --update \
-    git tar build-base linux-headers autoconf automake libtool pkgconfig \
-    dbus-dev bzip2 bison flex gmp-dev cmake lz4 libsodium-dev openssl-dev \
-    sed wget rust cargo erlang erlang-dev erlang-crypto erlang-asn1 \
-    erlang-public-key erlang-ssl erlang-eunit erlang-runtime-tools
+
+
+RUN \
+apt-get update && \
+DEBIAN_FRONTEND="noninteractive" \
+TZ="Europe/London" \
+apt-get -y install \
+erlang-nox \
+erlang-dev \
+git \
+--no-install-recommends && \
+apt-get autoremove -y &&\
+apt-get clean && \
+rm -rf /var/lib/apt/lists/*
+
 
 
 WORKDIR /opt/gateway_mfr
@@ -17,10 +27,20 @@ WORKDIR /opt/gateway_mfr/gateway_mfr
 RUN DEBUG=1 make release
 
 
-FROM balenalib/raspberry-pi-alpine:3.11-run
+FROM balenalib/raspberry-pi-debian:buster-run
 
 # hadolint ignore=DL3018
-RUN apk add --no-cache --update erlang libsodium python3
+RUN \
+apt-get update && \
+DEBIAN_FRONTEND="noninteractive" \
+TZ="Europe/London" \
+apt-get -y install \
+erlang-nox \
+python3-minimal \
+--no-install-recommends && \
+apt-get autoremove -y &&\
+apt-get clean && \
+rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt/gateway_mfr
 
