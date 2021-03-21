@@ -7,10 +7,6 @@ RUN apk add --no-cache --update \
     sed wget rust cargo erlang erlang-dev erlang-crypto erlang-asn1 \
     erlang-public-key erlang-ssl erlang-eunit erlang-runtime-tools
 
-ENV CC=gcc CXX=g++ CFLAGS="-U__sun__" \
-    ERLANG_ROCKSDB_OPTS="-DWITH_BUNDLE_SNAPPY=ON -DWITH_BUNDLE_LZ4=ON" \
-    ERL_COMPILER_OPTIONS="[deterministic]"
-
 
 WORKDIR /opt/gateway_mfr
 RUN git clone https://github.com/helium/gateway_mfr.git
@@ -18,7 +14,7 @@ RUN git clone https://github.com/helium/gateway_mfr.git
 
 WORKDIR /opt/gateway_mfr/gateway_mfr
 
-RUN make release
+RUN DEBUG=1 make release
 
 
 FROM balenalib/raspberry-pi-alpine:3.11-run
