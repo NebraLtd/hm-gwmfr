@@ -10,7 +10,7 @@ TZ="Europe/London" \
 apt-get -y install \
 erlang-nox=1:21.2.6+dfsg-1 \
 erlang-dev=1:21.2.6+dfsg-1 \
-git= \
+git=1:2.20.1-2+deb10u3 \
 --no-install-recommends && \
 apt-get autoremove -y &&\
 apt-get clean && \
