@@ -29,7 +29,7 @@ if "ecc_response_exec_error" in preTestResult:
         afterTest = subprocess.run(["/opt/gateway_mfr/bin/gateway_mfr", "ecc", "onboarding"], capture_output=True).stdout
         afterTestResult = str(afterTest.decode('ascii')).rstrip()
         print(afterTestResult)
-        
+
         if "ecc_response_exec_error" in afterTestResult:
             print("\033[91mProgramming FAILED\033[0m")
             print("Retrying provisioning")
