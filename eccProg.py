@@ -34,3 +34,5 @@ elif (len(preTestResult) == 51 or len(preTestResult) == 52):
 
 else:
     print("An Unknown Error Occured")
+    
+sleep(5000000)
