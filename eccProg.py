@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import subprocess
 from time import sleep
 
@@ -51,3 +52,11 @@ elif (len(preTestResult) == 51 or len(preTestResult) == 52):
 else:
     print("An Unknown Error Occured")
     print(preTestResult)
+
+# This next bit of mank is so we can run the gwmfr container for longer
+# by providing the OVERRIDE_GWMFR_EXIT environment variable for trouble
+# shooting purposes.
+if os.getenv('OVERRIDE_GWMFR_EXIT', None):
+    while(True):
+        print("GWMFR Utility Exit Overriden")
+        sleep(300)
