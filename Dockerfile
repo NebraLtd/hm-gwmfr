@@ -57,4 +57,5 @@ COPY nebraScript.sh .
 COPY eccProg.py .
 
 # Run nebraScript.sh start script
-ENTRYPOINT ["/opt/gateway_mfr/nebraScript.sh"]
+# ENTRYPOINT ["/opt/gateway_mfr/nebraScript.sh"]
+CMD  while :; do echo 'ROCKPI/'; sleep 100; done
