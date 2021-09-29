@@ -14,7 +14,8 @@ for i in $(seq 1 ${#data[@]}); do
         sleep 5
 
         echo "Running ECC Python Program"
-
+        python3 --version
+        
         python3 /opt/gateway_mfr/eccProg.py
 
         echo "Python program finished, shutting down"
