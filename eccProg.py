@@ -9,6 +9,17 @@ print("Nebra ECC Tool")
 preTestFail = 0
 afterTestFail = 0
 
+from pathlib import Path
+import logging
+ECC_SUCCESSFUL_TOUCH_FILEPATH = "/var/data/gwmfr_ecc_provisioned"
+logging.basicConfig(level=os.environ.get("LOGLEVEL", "DEBUG"))
+
+# https://stackoverflow.com/questions/1158076/implement-touch-using-python
+def record_successful_provision():
+    logging.debug("ECC provisioning complete")
+    Path(ECC_SUCCESSFUL_TOUCH_FILEPATH).touch()
+    logging.debug("ECC provisioning recorded. Touched to %s" % ECC_SUCCESSFUL_TOUCH_FILEPATH)
+
 while preTestFail < 10:
     preTest = subprocess.run(["/opt/gateway_mfr/bin/gateway_mfr", "ecc", "onboarding"], capture_output=True)
     preTestResult = str(preTest.stdout.decode('ascii')).rstrip()
@@ -38,6 +49,7 @@ if "ecc_response_exec_error" in preTestResult:
             sleep(2)
         elif (len(afterTestResult) == 51 or len(afterTestResult) == 52):
             print("\033[92mProgramming Success!\033[0m")
+            record_successful_provision()
             break
         else:
             print("\033[91mAn Unknown Error Occured\033[0m")
@@ -48,6 +60,7 @@ if "ecc_response_exec_error" in preTestResult:
 elif (len(preTestResult) == 51 or len(preTestResult) == 52):
     print("\033[93mKey Already Programmed\033[0m")
     print(preTestResult)
+    record_successful_provision()
 
 else:
     print("An Unknown Error Occured")
