@@ -5,7 +5,9 @@ echo "Checking for I2C device"
 mapfile -t data < <(i2cdetect -y 1)
 
 for i in $(seq 1 ${#data[@]}); do
+    # shellcheck disable=SC2206
     line=(${data[$i]})
+    # shellcheck disable=SC2068
     if echo ${line[@]:1} | grep -q 60; then
         echo "ECC is present"
         echo "Starting ECC Tool"
