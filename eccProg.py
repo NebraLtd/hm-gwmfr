@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from pathlib import Path
 from time import sleep
 import logging
 import os
@@ -15,10 +14,12 @@ ECC_SUCCESSFUL_TOUCH_FILEPATH = "/var/data/gwmfr_ecc_provisioned"
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "DEBUG"))
 
 
-# https://stackoverflow.com/questions/1158076/implement-touch-using-python
 def record_successful_provision():
     logging.debug("ECC provisioning complete")
-    Path(ECC_SUCCESSFUL_TOUCH_FILEPATH).touch()
+    # Via: https://stackoverflow.com/questions/12654772/create-empty-file-using-python/12654798
+    # because path lib not included in python3-minimal
+    # https://stackoverflow.com/questions/1158076/implement-touch-using-python
+    open(ECC_SUCCESSFUL_TOUCH_FILEPATH, 'a').close()
     logging.debug("ECC provisioning recorded. Touched to %s" % ECC_SUCCESSFUL_TOUCH_FILEPATH)
 
 
