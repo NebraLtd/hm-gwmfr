@@ -1,24 +1,26 @@
 #!/usr/bin/env python3
 
+from pathlib import Path
+from time import sleep
+import logging
 import os
 import subprocess
-from time import sleep
 
 print("Nebra ECC Tool")
 
 preTestFail = 0
 afterTestFail = 0
 
-from pathlib import Path
-import logging
 ECC_SUCCESSFUL_TOUCH_FILEPATH = "/var/data/gwmfr_ecc_provisioned"
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "DEBUG"))
+
 
 # https://stackoverflow.com/questions/1158076/implement-touch-using-python
 def record_successful_provision():
     logging.debug("ECC provisioning complete")
     Path(ECC_SUCCESSFUL_TOUCH_FILEPATH).touch()
     logging.debug("ECC provisioning recorded. Touched to %s" % ECC_SUCCESSFUL_TOUCH_FILEPATH)
+
 
 while preTestFail < 10:
     preTest = subprocess.run(["/opt/gateway_mfr/bin/gateway_mfr", "ecc", "onboarding"], capture_output=True)
