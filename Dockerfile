@@ -1,9 +1,12 @@
-ARG SYSTEM_TIMEZONE="Europe/London"
+ARG SYSTEM_TIMEZONE=Europe/London
 
 ####################################################################################################
 ################################## Stage: builder ##################################################
 
 FROM balenalib/raspberry-pi-debian:buster-build as builder
+
+# Copy build ARG
+ARG SYSTEM_TIMEZONE
 
 # Install dependencies
 RUN \
@@ -32,6 +35,9 @@ RUN DEBUG=1 make release
 ################################### Stage: runner ##################################################
 
 FROM balenalib/raspberry-pi-debian:buster-run
+
+# Copy build ARG
+ARG SYSTEM_TIMEZONE
 
 # Install dependencies and clean up
 RUN \
