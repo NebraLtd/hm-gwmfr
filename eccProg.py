@@ -60,7 +60,7 @@ if "ecc_response_exec_error" in preTestResult:
             afterTestFail += 1
             sleep(2)
 
-elif (len(preTestResult) == 51 or len(preTestResult) == 52):
+elif (len(preTestResult) == 50 or len(preTestResult) == 51 or len(preTestResult) == 52):
     print("\033[93mKey Already Programmed\033[0m")
     print(preTestResult)
     record_successful_provision()
